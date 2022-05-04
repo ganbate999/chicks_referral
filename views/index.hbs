@@ -1,0 +1,99 @@
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background: #f1f1f1;
+  color: black;
+}
+
+.navbar a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.main {
+  padding: 50px;
+  margin-bottom: 30px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<script>
+    Handlebars.registerHelper('if_time', function(a, b, opts) {
+    if (a == b) {
+        return opts.fn(this);
+    } else {
+        return opts.inverse(this);
+    }
+});
+</script>
+<div class="navbar">
+  <a href="/" class="active">ALL FLIGHTS</a>
+  <a href="/new">ADD FLIGHT</a>
+</div>
+
+<div class="main">
+    <h1>Welcome to flights</h1>
+    <table>
+        <tr>
+            <td>Airline</td>
+            <td>Airport</td>
+            <td>FlightsNo</td>
+            <td>Departs</td>
+        </tr>
+        {{#each current_flight}}
+        {{#if this.current_date }}
+        <tr style = "color:red">
+        {{else}}
+        <tr>
+        {{/if}}
+            <td>
+                {{this.airline}}
+            </td>
+            <td>
+                {{this.airport}}
+            </td>
+            <td>
+                {{this.flightsno}}
+            </td>   
+            <td>
+                {{this.departs}}
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+</div>
